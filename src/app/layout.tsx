@@ -1,8 +1,6 @@
 import './globals.css'
-import { Inter } from 'next/font/google'
 import Sidebar from '@/components/Sidebar'
-
-const inter = Inter({ subsets: ['latin'] })
+import { karla } from './fonts'
 
 export const metadata = {
   title: 'Pulse Talk',
@@ -12,8 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={karla.className}>
         <main className="flex min-h-screen flex-row bg-slate-50">
+          {/* @ts-expect-error Server Component */}
           <Sidebar />
           {children}
         </main>
