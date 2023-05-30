@@ -2,7 +2,7 @@
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import { FC } from 'react'
-import { lora } from '../fonts'
+import { lora } from '../../fonts'
 
 const Login: FC = ({}) => {
   async function loginWithGoogle() {
