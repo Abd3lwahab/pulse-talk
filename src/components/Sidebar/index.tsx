@@ -1,30 +1,64 @@
-'use client'
-
-import { FC } from 'react'
-import IconComponent from '@/components/ui/icon'
-import {
-  HomeIcon,
-  ChatBubbleLeftEllipsisIcon,
-  UserPlusIcon,
-  ArrowLeftOnRectangleIcon,
-} from '@heroicons/react/24/outline'
 import Image from 'next/image'
-import { signOut } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
 
-const Sidebar: FC = ({}) => {
+import ActiveLink from './ActiveLink'
+import SignOutButton from './SignOutButton'
+import { authOptions } from '@/lib/auth'
+import { lora } from '@/app/fonts'
+import { db } from '@/lib/db'
+
+const Sidebar = async ({}) => {
+  const session = await getServerSession(authOptions)
+
+  const friendRequests = (
+    (await db.smembers(`user:${session!.user.id}:friend_requests`)) as string[]
+  ).length
+
   return (
-    <div className="flex flex-col min-h-full  border-r border-slate-200">
-      <div className="p-4 border-b border-slate-200 mb-12">
-        <Image src="/logo-no.png" width={45} height={45} alt="logo" unoptimized priority />
+    <div className="flex flex-col min-h-full  border-r border-slate-200 min-w-[230px] w-[230px]">
+      <div className="mx-8 py-8 border-b border-slate-200 mb-12">
+        <Image
+          src="/logo-no-background-2.png"
+          width={145}
+          height={45}
+          alt="logo"
+          unoptimized
+          priority
+          className="m-auto"
+        />
       </div>
-      <div className="flex h-full flex-col items-center justify-between">
-        <div>
-          <IconComponent icon={HomeIcon} />
-          <IconComponent icon={ChatBubbleLeftEllipsisIcon} />
-          <IconComponent icon={UserPlusIcon} />
+
+      <div className="flex h-full flex-col items-center justify-between ">
+        <div className="w-full px-8">
+          <ActiveLink href="/" icon={'HomeIcon'} text="Home" />
+          <ActiveLink href="/chats" icon={'ChatBubbleLeftEllipsisIcon'} text="Chats" />
+          <ActiveLink
+            href="/friend-requests"
+            icon={'UserPlusIcon'}
+            text="Friend Requests"
+            friendRequests={friendRequests}
+          />
         </div>
-        <div className="flex pt-8 border-t border-slate-200 w-full justify-center">
-          <IconComponent icon={ArrowLeftOnRectangleIcon} onClick={() => signOut()} />
+
+        <div className="w-full flex flex-col justify-between">
+          <div className="flex flex-col flex-grow flex-1 justify-center items-center pb-2">
+            <div className="mr-2">
+              <Image
+                src={session!.user.image || ''}
+                width={50}
+                height={50}
+                alt="profile picture"
+                className="rounded-full"
+              />
+            </div>
+            <div className="flex flex-col text-center w-full px-2">
+              <p className={`text-copper-600 font-bold text-base ${lora.className}`}>
+                {session!.user.name}
+              </p>
+              <p className="text-copper-600 text-sm  truncate block ">{session!.user.email}</p>
+            </div>
+          </div>
+          <SignOutButton />
         </div>
       </div>
     </div>
