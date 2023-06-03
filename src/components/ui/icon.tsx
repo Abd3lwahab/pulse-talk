@@ -5,6 +5,9 @@ import {
   ArrowRightOnRectangleIcon,
   CheckIcon,
   XMarkIcon,
+  UserIcon,
+  ChevronRightIcon,
+  BellAlertIcon,
 } from '@heroicons/react/24/outline'
 
 const Icons = {
@@ -14,6 +17,9 @@ const Icons = {
   ArrowRightOnRectangleIcon,
   CheckIcon,
   XMarkIcon,
+  UserIcon,
+  ChevronRightIcon,
+  BellAlertIcon,
 }
 
 export default Icons

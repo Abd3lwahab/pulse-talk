@@ -22,6 +22,10 @@ module.exports = {
           950: '#00010F',
         },
       },
+      fontFamily: {
+        lora: ['var(--font-lora)'],
+        karla: ['var(--font-karla)'],
+      },
     },
   },
   plugins: [],

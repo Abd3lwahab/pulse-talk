@@ -4,7 +4,6 @@ import { getServerSession } from 'next-auth'
 import ActiveLink from './ActiveLink'
 import SignOutButton from './SignOutButton'
 import { authOptions } from '@/lib/auth'
-import { lora } from '@/app/fonts'
 import { db } from '@/lib/db'
 
 const Sidebar = async ({}) => {
@@ -52,9 +51,7 @@ const Sidebar = async ({}) => {
               />
             </div>
             <div className="flex flex-col text-center w-full px-2">
-              <p className={`text-copper-600 font-bold text-base ${lora.className}`}>
-                {session!.user.name}
-              </p>
+              <p className="text-copper-600 font-bold text-base font-lora">{session!.user.name}</p>
               <p className="text-copper-600 text-sm  truncate block ">{session!.user.email}</p>
             </div>
           </div>

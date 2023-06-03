@@ -1,4 +1,3 @@
-import { lora } from '../../fonts'
 import SendFriendRequestForm from '@/components/SendFriendRequestForm'
 import { db } from '@/lib/db'
 import { getServerSession } from 'next-auth'
@@ -21,9 +20,7 @@ export default async function Page() {
 
   return (
     <div className="flex p-8 flex-grow flex-col">
-      <h2
-        className={`${lora.className} text-3xl font-bold border-b border-slate-200 pb-4 mb-8 text-copper-600`}
-      >
+      <h2 className="font-lora text-3xl font-bold border-b border-slate-200 pb-4 mb-8 text-copper-600">
         Friend Requests
       </h2>
       {friendRequestsNumbers === 0 && (
@@ -35,7 +32,7 @@ export default async function Page() {
         <FriendRequest key={friendRequest.id} friend={friendRequest} />
       ))}
       <div className="flex flex-col p-4 rounded-lg  border border-slate-200 max-w-fit mt-14">
-        <h4 className={`${lora.className} text-2xl font-bold mb-6 text-copper-600`}>
+        <h4 className="font-lora text-2xl font-bold mb-6 text-copper-600`">
           Find one to share your thoughts with
         </h4>
         <SendFriendRequestForm />
