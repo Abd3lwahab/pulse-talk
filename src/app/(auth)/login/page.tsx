@@ -1,4 +1,5 @@
 'use client'
+
 import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import { FC } from 'react'
@@ -18,7 +19,7 @@ const Login: FC = ({}) => {
       <div className="flex flex-col">
         <div className="flex justify-center border-b border-slate-200 mb-12">
           <Image
-            src="/logo-no-background-2.png"
+            src="/assets/logo-no-background-2.png"
             width={200}
             height={512}
             alt="logo"

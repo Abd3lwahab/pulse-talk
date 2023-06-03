@@ -18,13 +18,13 @@ const Sidebar = async ({}) => {
     <div className="flex flex-col min-h-full  border-r border-slate-200 min-w-[230px] w-[230px]">
       <div className="mx-8 py-8 border-b border-slate-200 mb-12">
         <Image
-          src="/logo-no-background-2.png"
+          src="/assets/logo-no-background-2.png"
           width={145}
           height={45}
           alt="logo"
           unoptimized
           priority
-          className="m-auto"
+          className="m-auto w-auto h-auto"
         />
       </div>
 
