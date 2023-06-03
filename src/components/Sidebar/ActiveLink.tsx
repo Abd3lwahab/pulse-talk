@@ -14,14 +14,14 @@ interface ActiveLinkProps {
 
 const ActiveLink: FC<ActiveLinkProps> = ({ href, icon, text, friendRequests }) => {
   const pathname = usePathname()
+  const isActive = pathname === href || (href === '/chats' && pathname.startsWith('/chats/'))
+
   const Icon = Icons[icon]
   return (
     <Link href={href} className="flex flex-row items-center mb-4 pr-8 mr-[-32px] relative">
-      <Icon className={`w-6 ${pathname === href ? 'text-copper-400' : 'text-copper-600'}`} />
+      <Icon className={`w-6 ${isActive ? 'text-copper-400' : 'text-copper-600'}`} />
       <p
-        className={`ml-2 font-bold text-base  ${
-          pathname === href ? 'text-copper-400' : 'text-copper-600'
-        }`}
+        className={`ml-2 font-bold text-base  ${isActive ? 'text-copper-400' : 'text-copper-600'}`}
       >
         {text}
       </p>
@@ -30,7 +30,7 @@ const ActiveLink: FC<ActiveLinkProps> = ({ href, icon, text, friendRequests }) =
           <span>{friendRequests}</span>
         </div>
       )}
-      {pathname === href && <div className="w-1 h-4 bg-copper-400 absolute right-0"></div>}
+      {isActive && <div className="w-1 h-4 bg-copper-400 absolute right-0"></div>}
     </Link>
   )
 }
