@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${lora.variable} ${karla.variable}`}>
       <body className="font-karla">
-        <main className="flex min-h-screen flex-row bg-slate-50">
+        <main className="flex min-h-screen h-screen flex-row bg-slate-50 overflow-hidden">
           {/* @ts-expect-error Server Component  */}
           <Sidebar />
           <Providers>{children}</Providers>
