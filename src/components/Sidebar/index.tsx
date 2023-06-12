@@ -35,7 +35,8 @@ const Sidebar = async ({}) => {
             href="/friend-requests"
             icon={'UserPlusIcon'}
             text="Friend Requests"
-            friendRequests={friendRequests}
+            intialFriendRequests={friendRequests}
+            userId={session!.user.id}
           />
         </div>
 
