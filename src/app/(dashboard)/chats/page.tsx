@@ -64,22 +64,22 @@ export default async function Page() {
           <polygon
             fill="none"
             stroke="#000"
-            stroke-miterlimit="10"
-            stroke-width=".968"
+            strokeMiterlimit="10"
+            strokeWidth=".968"
             points="345.58 159.331 319.958 159.331 319.958 175.192 329.277 175.192 332.769 178.684 336.26 175.192 345.58 175.192 345.58 159.331"
           ></polygon>
           <polygon
             fill="none"
             stroke="#000"
-            stroke-miterlimit="10"
-            stroke-width=".968"
+            strokeMiterlimit="10"
+            strokeWidth=".968"
             points="371.202 134.96 345.58 134.96 345.58 150.821 354.899 150.821 358.391 154.313 361.882 150.821 371.202 150.821 371.202 134.96"
           ></polygon>
           <polygon
             fill="none"
             stroke="#000"
-            stroke-miterlimit="10"
-            stroke-width=".968"
+            strokeMiterlimit="10"
+            strokeWidth=".968"
             points="342.577 113.75 316.955 113.75 316.955 129.611 326.275 129.611 329.767 133.102 333.258 129.611 342.577 129.611 342.577 113.75"
           ></polygon>
         </svg>
