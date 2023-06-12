@@ -4,3 +4,8 @@ interface User {
   email: string
   image: string
 }
+
+interface Chat {
+  id: string
+  messages: Message[]
+}
