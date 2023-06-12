@@ -2,16 +2,16 @@
 
 import { FC } from 'react'
 import Image from 'next/image'
-import Icons from '../ui/icon'
 import axios, { AxiosError } from 'axios'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/navigation'
 
 interface FriendRequestProps {
   friend: User
+  updateCallback: (friendRequests: User) => void
 }
 
-const FriendRequest: FC<FriendRequestProps> = ({ friend }) => {
+const FriendRequest: FC<FriendRequestProps> = ({ friend, updateCallback }) => {
   const router = useRouter()
 
   const acceptFriendRequest = async () => {
@@ -20,6 +20,7 @@ const FriendRequest: FC<FriendRequestProps> = ({ friend }) => {
       toast.success('🎉 Friend request accepted! 🎉', {
         className: 'bg-copper-800',
       })
+      updateCallback(friend)
       router.refresh()
     } catch (error) {
       toast.error((error as AxiosError).response?.data as string, {
@@ -33,6 +34,7 @@ const FriendRequest: FC<FriendRequestProps> = ({ friend }) => {
       toast.success('Friend request declined.', {
         className: 'bg-copper-800',
       })
+      updateCallback(friend)
       router.refresh()
     } catch (error) {
       toast.error((error as AxiosError).response?.data as string, {
@@ -40,9 +42,6 @@ const FriendRequest: FC<FriendRequestProps> = ({ friend }) => {
       })
     }
   }
-
-  const AcceptIcon = Icons['CheckIcon']
-  const RejectIcon = Icons['XMarkIcon']
 
   return (
     <div className="flex flex-row justify-between max-w-[470px] items-center w-[470px]">
@@ -57,7 +56,7 @@ const FriendRequest: FC<FriendRequestProps> = ({ friend }) => {
           />
         </div>
         <div className="flex flex-col max-w-[250px]">
-          <p className="font-lora font-bold">{friend.name}</p>
+          <p className="font-lora font-bold text-lg">{friend.name}</p>
           <p className="text-base truncate">{friend.email}</p>
         </div>
       </div>
@@ -67,15 +66,12 @@ const FriendRequest: FC<FriendRequestProps> = ({ friend }) => {
           onClick={acceptFriendRequest}
         >
           <p>Accept</p>
-          {/* <AcceptIcon className="w-5 h-5" /> */}
         </button>
         <button
           className="p-2 bg-red-700 text-white rounded-lg ml-2 hover:bg-red-600  transition hover:sgadow-md w-16"
           onClick={rejectFriendRequest}
         >
           <p>Reject</p>
-
-          {/* <RejectIcon className="w-5 h-5" /> */}
         </button>
       </div>
     </div>
