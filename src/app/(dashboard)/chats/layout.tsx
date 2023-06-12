@@ -14,13 +14,15 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     friendsIds.map((friendId) => db.get(`user:${friendId}`))
   )) as User[]
 
+  const sortedFriends = friends.sort((a, b) => a.id.localeCompare(b.id))
+
   return (
     <div className="flex p-8 flex-grow flex-col">
       <h2 className="font-lora text-3xl font-bold border-b border-slate-200 pb-4 text-copper-600">
         Chats
       </h2>
       <div className="flex flex-row overflow-auto flex-grow">
-        <ChatSidebar friends={friends} userId={session.user.id} />
+        <ChatSidebar friends={sortedFriends} userId={session.user.id} />
         {children}
       </div>
     </div>
