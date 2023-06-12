@@ -1,5 +1,7 @@
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
+import { pusherServer } from '@/lib/pusher'
+import { getPusherChannelName } from '@/lib/utils'
 import { getServerSession } from 'next-auth'
 import { NextResponse } from 'next/server'
 
@@ -31,12 +33,20 @@ export async function POST(req: Request) {
       })
     }
 
-    await db
-      .multi()
-      .sadd(`user:${userId}:friends`, friendId)
-      .sadd(`user:${friendId}:friends`, userId)
-      .srem(`user:${userId}:friend_requests`, friendId)
-      .exec()
+    await Promise.all([
+      pusherServer.trigger(
+        getPusherChannelName(`user:${userId}:friend_requests`),
+        'friend_request_resolved',
+        null
+      ),
+
+      db
+        .multi()
+        .sadd(`user:${userId}:friends`, friendId)
+        .sadd(`user:${friendId}:friends`, userId)
+        .srem(`user:${userId}:friend_requests`, friendId)
+        .exec(),
+    ])
 
     return new NextResponse('OK', {
       status: 200,

@@ -1,6 +1,8 @@
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
+import { pusherServer } from '@/lib/pusher'
 import { fetchRedis } from '@/lib/redis'
+import { getPusherChannelName } from '@/lib/utils'
 import { sendFriendRequestValidator } from '@/lib/validations'
 import { getServerSession } from 'next-auth'
 import { NextResponse } from 'next/server'
@@ -62,8 +64,20 @@ export async function POST(req: Request) {
       })
     }
 
-    // send a friend request
-    await db.sadd(`user:${friendId}:friend_requests`, userId)
+    await Promise.all([
+      pusherServer.trigger(
+        getPusherChannelName(`user:${friendId}:friend_requests`),
+        'friend_requests',
+        {
+          id: session.user.id,
+          name: session.user.name,
+          email: session.user.email,
+          image: session.user.image,
+        }
+      ),
+
+      db.sadd(`user:${friendId}:friend_requests`, userId),
+    ])
 
     return new NextResponse('OK', {
       status: 200,
