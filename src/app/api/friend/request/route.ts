@@ -1,7 +1,6 @@
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/db'
 import { pusherServer } from '@/lib/pusher'
-import { fetchRedis } from '@/lib/redis'
 import { getPusherChannelName } from '@/lib/utils'
 import { sendFriendRequestValidator } from '@/lib/validations'
 import { getServerSession } from 'next-auth'
@@ -22,7 +21,6 @@ export async function POST(req: Request) {
     }
 
     // getting friend id from email
-    // const friendId = await fetchRedis('get', `user:email:${friendEmail}`)
     const friendId = (await db.get(`user:email:${friendEmail}`)) as string | null
     if (!friendId) {
       return new NextResponse("This user does't exist yet!", {
@@ -39,7 +37,6 @@ export async function POST(req: Request) {
     }
 
     // check if user is already sent a request to this email
-    // const isAlreadyRequested = await fetchRedis('sismember', `user:${friendId}:friend_requests`, userId)
     const isAlreadyRequested = await db.sismember(`user:${friendId}:friend_requests`, userId)
     if (isAlreadyRequested) {
       return new NextResponse('Already sent a request. Be patient and explore more friendships!', {
@@ -48,7 +45,6 @@ export async function POST(req: Request) {
     }
 
     // check if they are already friends
-    // const isAlreadyFriends = await fetchRedis('sismember', `user:${userId}:friends`, friendId)
     const isAlreadyFriends = await db.sismember(`user:${userId}:friends`, friendId)
     if (isAlreadyFriends) {
       return new NextResponse('Already friends! Enjoy the connection! 🎉', {

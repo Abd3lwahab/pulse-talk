@@ -8,6 +8,7 @@ import {
   UserIcon,
   ChevronRightIcon,
   BellAlertIcon,
+  PaperAirplaneIcon,
 } from '@heroicons/react/24/outline'
 
 const Icons = {
@@ -20,6 +21,7 @@ const Icons = {
   UserIcon,
   ChevronRightIcon,
   BellAlertIcon,
+  PaperAirplaneIcon,
 }
 
 export default Icons
