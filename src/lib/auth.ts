@@ -19,6 +19,7 @@ function getGoogleCreatintial() {
 }
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
   adapter: UpstashRedisAdapter(db),
   session: {
     strategy: 'jwt',
@@ -58,7 +59,7 @@ export const authOptions: NextAuthOptions = {
       return session
     },
     redirect() {
-      return '/'
+      return '/dashboard'
     },
   },
 }
