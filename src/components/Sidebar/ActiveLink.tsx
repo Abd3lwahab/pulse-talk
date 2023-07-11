@@ -61,20 +61,20 @@ const ActiveLink: FC<ActiveLinkProps> = ({ href, icon, text, intialFriendRequest
   const isActive = pathname === href || (href === '/chats' && pathname.startsWith('/chats/'))
 
   // Workaround to force next.js to refetch the latest data
-  const neavigateToDynamicRoute = (e: any) => {
-    e.preventDefault()
-    router.replace(href)
-    if (href !== '/') {
-      router.refresh()
-    }
-  }
+  // const neavigateToDynamicRoute = (e: any) => {
+  //   e.preventDefault()
+  //   router.replace(href)
+  //   if (href !== '/') {
+  //     router.refresh()
+  //   }
+  // }
 
   const Icon = Icons[icon]
   return (
     <Link
       href={href}
       className="flex flex-row items-center mb-4 pr-8 mr-[-32px] relative"
-      onClick={(e) => neavigateToDynamicRoute(e)}
+      // onClick={(e) => neavigateToDynamicRoute(e)}
     >
       <Icon className={`w-6 ${isActive ? 'text-copper-400' : 'text-copper-600'}`} />
       <p

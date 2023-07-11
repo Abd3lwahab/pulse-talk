@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import SendFriendRequestForm from '@/components/SendFriendRequestForm'
 import { db } from '@/lib/db'
 import { getServerSession } from 'next-auth'
