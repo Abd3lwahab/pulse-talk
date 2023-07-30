@@ -1,11 +1,12 @@
-export const dynamic = 'force-dynamic'
-
 import SendFriendRequestForm from '@/components/SendFriendRequestForm'
 import { db } from '@/lib/db'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { notFound } from 'next/navigation'
 import FriendRequestList from '@/components/FriendRequestList/FriendRequestList'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0;
 
 const getFriendRequests = async (userId: string) => {
   const friendRequestsIds = (await db.smembers(`user:${userId}:friend_requests`)) as string[]
